@@ -1,0 +1,739 @@
+[
+    {
+        "id": "2ed7aa20ee169bcd",
+        "type": "tab",
+        "label": "Home page",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d94a2df7ee70470a",
+        "type": "ui_gauge",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "group": "e072c67e1049564e",
+        "order": 2,
+        "width": "6",
+        "height": "5",
+        "gtype": "donut",
+        "title": "Gauge PM 10.0",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1360,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a295d12caefaf2d1",
+        "type": "ui_gauge",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "group": "e072c67e1049564e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Gauge PM 2.5",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1540,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "6cf484c663afef6b",
+        "type": "ui_switch",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "label": "Turn on/Turn off Fan",
+        "tooltip": "",
+        "group": "e072c67e1049564e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "PM2.5",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 1460,
+        "y": 420,
+        "wires": [
+            [
+                "901256d50af56342"
+            ]
+        ]
+    },
+    {
+        "id": "a4d2864f5913d380",
+        "type": "http request",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.thingspeak.com/channels/1985938/feeds.json?api_key=GLF0RYZ8WWDE4DHD&results=2",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "12ae30f3d9546881"
+            ]
+        ]
+    },
+    {
+        "id": "f33bc506a7cc233f",
+        "type": "inject",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "a4d2864f5913d380"
+            ]
+        ]
+    },
+    {
+        "id": "12ae30f3d9546881",
+        "type": "json",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 670,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f3a8a95426a4405f",
+        "type": "mqtt in",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "topic": "20127470_20127566_20127611/OFA_INPUT_PM25",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c3b56dbd9b0ce293",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1170,
+        "y": 700,
+        "wires": [
+            [
+                "a295d12caefaf2d1",
+                "76a9ba7ab65a8ef6",
+                "81348e26bf2ed355"
+            ]
+        ]
+    },
+    {
+        "id": "901256d50af56342",
+        "type": "mqtt out",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "topic": "20127470_20127566_20127611/OFA_OUTPUT_FAN",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c3b56dbd9b0ce293",
+        "x": 1840,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "218327f76bc29606",
+        "type": "mqtt in",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "topic": "20127470_20127566_20127611/OFA_INPUT_PM10",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c3b56dbd9b0ce293",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1010,
+        "y": 160,
+        "wires": [
+            [
+                "d94a2df7ee70470a",
+                "dcc3706bc8179c85",
+                "3a4d45d513f05d64"
+            ]
+        ]
+    },
+    {
+        "id": "5e0d4e5ed45e76ef",
+        "type": "mqtt in",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "topic": "20127470_20127566_20127611/OFA_INPUT_FAN",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c3b56dbd9b0ce293",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1030,
+        "y": 420,
+        "wires": [
+            [
+                "6cf484c663afef6b"
+            ]
+        ]
+    },
+    {
+        "id": "8030e4f5b56d3c9e",
+        "type": "ui_form",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "label": "Login",
+        "group": "f07509274c14b590",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Email",
+                "value": "login-email",
+                "type": "email",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Password",
+                "value": "login-password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "login-email": "",
+            "login-password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 650,
+        "y": 640,
+        "wires": [
+            [
+                "e19b6803db9c82a7",
+                "a85c047203dfd5c3"
+            ]
+        ]
+    },
+    {
+        "id": "368dc55c8a489771",
+        "type": "http request",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.thingspeak.com/channels/1985938/feeds.json?api_key=GLF0RYZ8WWDE4DHD&results=2",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 290,
+        "y": 640,
+        "wires": [
+            [
+                "2ad49664aabb1041"
+            ]
+        ]
+    },
+    {
+        "id": "97e8bc534044ce1f",
+        "type": "inject",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 640,
+        "wires": [
+            [
+                "368dc55c8a489771"
+            ]
+        ]
+    },
+    {
+        "id": "2ad49664aabb1041",
+        "type": "json",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 490,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e19b6803db9c82a7",
+        "type": "debug",
+        "z": "2ed7aa20ee169bcd",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a85c047203dfd5c3",
+        "type": "function",
+        "z": "2ed7aa20ee169bcd",
+        "name": "HandleLogin",
+        "func": "const email = msg.payload[\"login-email\"];\nconst password = msg.payload[\"login-password\"];\n\nif (email == \"123@gmail.com\" && password == \"123\") {\n    msg.payload = true;\n}\nelse {\n    msg.payload = false;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e3da0d0484db642",
+        "type": "ui_form",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "label": "Sign Up",
+        "group": "0f2981f4aa63e7d8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Email",
+                "value": "su-email",
+                "type": "email",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Password",
+                "value": "su-password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Confirm password",
+                "value": "su-confirm-password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "su-email": "",
+            "su-password": "",
+            "su-confirm-password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 240,
+        "y": 860,
+        "wires": [
+            [
+                "24b7acbb561a61bd"
+            ]
+        ]
+    },
+    {
+        "id": "24b7acbb561a61bd",
+        "type": "function",
+        "z": "2ed7aa20ee169bcd",
+        "name": "HandleSignUp",
+        "func": "const email = msg.payload[\"su-email\"];\nconst password = msg.payload[\"su-password\"];\nconst confirmPassword = msg.payload[\"su-confirm-password\"];\n\nif (confirmPassword == password) {\n    msg.payload.register = true;\n    msg.payload = {\n        group: {\n            show: [\"Dashboard_Login\"],\n            hide: [\"Dashboard_SignUp\"]\n        }\n    };\n}\nelse {\n    msg.payload.register = false;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "02157dd465477b1b",
+        "type": "comment",
+        "z": "2ed7aa20ee169bcd",
+        "name": "Login",
+        "info": "",
+        "x": 270,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "74c1f1696eaf585b",
+        "type": "comment",
+        "z": "2ed7aa20ee169bcd",
+        "name": "Home",
+        "info": "",
+        "x": 270,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ea2812bff68c75fd",
+        "type": "comment",
+        "z": "2ed7aa20ee169bcd",
+        "name": "Sign up",
+        "info": "",
+        "x": 230,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "dcc3706bc8179c85",
+        "type": "http request",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.thingspeak.com/update?api_key=GBJ9VMTWPYU40G1N&field1={{payload}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1350,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a4d45d513f05d64",
+        "type": "debug",
+        "z": "2ed7aa20ee169bcd",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1340,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "76a9ba7ab65a8ef6",
+        "type": "http request",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.thingspeak.com/update?api_key=GBJ9VMTWPYU40G1N&field2={{payload}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1550,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e08d37243d748158",
+        "type": "http request",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.thingspeak.com/channels/1992817/feeds.json?api_key=TVA1VZFG123QRNQ3&results=5",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1310,
+        "y": 940,
+        "wires": [
+            [
+                "ce6c899153c04ece"
+            ]
+        ]
+    },
+    {
+        "id": "b851bfe8a687deca",
+        "type": "inject",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 1010,
+        "y": 940,
+        "wires": [
+            [
+                "e08d37243d748158"
+            ]
+        ]
+    },
+    {
+        "id": "ce6c899153c04ece",
+        "type": "json",
+        "z": "2ed7aa20ee169bcd",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1550,
+        "y": 940,
+        "wires": [
+            [
+                "7f8dddd3412b67d7"
+            ]
+        ]
+    },
+    {
+        "id": "7f8dddd3412b67d7",
+        "type": "debug",
+        "z": "2ed7aa20ee169bcd",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1760,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "81348e26bf2ed355",
+        "type": "debug",
+        "z": "2ed7aa20ee169bcd",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "e072c67e1049564e",
+        "type": "ui_group",
+        "name": "Home",
+        "tab": "d9365e0f.e1bf6",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c3b56dbd9b0ce293",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.mqtt-dashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f07509274c14b590",
+        "type": "ui_group",
+        "name": "Login",
+        "tab": "17506f70b70758c3",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0f2981f4aa63e7d8",
+        "type": "ui_group",
+        "name": "Sign Up",
+        "tab": "c1b9681649e88341",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d9365e0f.e1bf6",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "home",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "17506f70b70758c3",
+        "type": "ui_tab",
+        "name": "Login",
+        "icon": "login",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c1b9681649e88341",
+        "type": "ui_tab",
+        "name": "Sign Up",
+        "icon": "add",
+        "disabled": false,
+        "hidden": false
+    }
+]
