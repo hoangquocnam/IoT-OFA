@@ -96,73 +96,6 @@
         ]
     },
     {
-        "id": "a4d2864f5913d380",
-        "type": "http request",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "https://api.thingspeak.com/channels/1985938/feeds.json?api_key=GLF0RYZ8WWDE4DHD&results=2",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 470,
-        "y": 240,
-        "wires": [
-            [
-                "12ae30f3d9546881"
-            ]
-        ]
-    },
-    {
-        "id": "f33bc506a7cc233f",
-        "type": "inject",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 270,
-        "y": 240,
-        "wires": [
-            [
-                "a4d2864f5913d380"
-            ]
-        ]
-    },
-    {
-        "id": "12ae30f3d9546881",
-        "type": "json",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 670,
-        "y": 240,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "f3a8a95426a4405f",
         "type": "mqtt in",
         "z": "2ed7aa20ee169bcd",
@@ -248,252 +181,6 @@
         ]
     },
     {
-        "id": "8030e4f5b56d3c9e",
-        "type": "ui_form",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "label": "Login",
-        "group": "f07509274c14b590",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "options": [
-            {
-                "label": "Email",
-                "value": "login-email",
-                "type": "email",
-                "required": true,
-                "rows": null
-            },
-            {
-                "label": "Password",
-                "value": "login-password",
-                "type": "password",
-                "required": true,
-                "rows": null
-            }
-        ],
-        "formValue": {
-            "login-email": "",
-            "login-password": ""
-        },
-        "payload": "",
-        "submit": "submit",
-        "cancel": "cancel",
-        "topic": "topic",
-        "topicType": "msg",
-        "splitLayout": "",
-        "className": "",
-        "x": 650,
-        "y": 640,
-        "wires": [
-            [
-                "e19b6803db9c82a7",
-                "a85c047203dfd5c3"
-            ]
-        ]
-    },
-    {
-        "id": "368dc55c8a489771",
-        "type": "http request",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "https://api.thingspeak.com/channels/1985938/feeds.json?api_key=GLF0RYZ8WWDE4DHD&results=2",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 290,
-        "y": 640,
-        "wires": [
-            [
-                "2ad49664aabb1041"
-            ]
-        ]
-    },
-    {
-        "id": "97e8bc534044ce1f",
-        "type": "inject",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 90,
-        "y": 640,
-        "wires": [
-            [
-                "368dc55c8a489771"
-            ]
-        ]
-    },
-    {
-        "id": "2ad49664aabb1041",
-        "type": "json",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 490,
-        "y": 640,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e19b6803db9c82a7",
-        "type": "debug",
-        "z": "2ed7aa20ee169bcd",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "a85c047203dfd5c3",
-        "type": "function",
-        "z": "2ed7aa20ee169bcd",
-        "name": "HandleLogin",
-        "func": "const email = msg.payload[\"login-email\"];\nconst password = msg.payload[\"login-password\"];\n\nif (email == \"123@gmail.com\" && password == \"123\") {\n    msg.payload = true;\n}\nelse {\n    msg.payload = false;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 830,
-        "y": 540,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2e3da0d0484db642",
-        "type": "ui_form",
-        "z": "2ed7aa20ee169bcd",
-        "name": "",
-        "label": "Sign Up",
-        "group": "0f2981f4aa63e7d8",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "options": [
-            {
-                "label": "Email",
-                "value": "su-email",
-                "type": "email",
-                "required": true,
-                "rows": null
-            },
-            {
-                "label": "Password",
-                "value": "su-password",
-                "type": "password",
-                "required": true,
-                "rows": null
-            },
-            {
-                "label": "Confirm password",
-                "value": "su-confirm-password",
-                "type": "password",
-                "required": true,
-                "rows": null
-            }
-        ],
-        "formValue": {
-            "su-email": "",
-            "su-password": "",
-            "su-confirm-password": ""
-        },
-        "payload": "",
-        "submit": "submit",
-        "cancel": "cancel",
-        "topic": "topic",
-        "topicType": "msg",
-        "splitLayout": "",
-        "className": "",
-        "x": 240,
-        "y": 860,
-        "wires": [
-            [
-                "24b7acbb561a61bd"
-            ]
-        ]
-    },
-    {
-        "id": "24b7acbb561a61bd",
-        "type": "function",
-        "z": "2ed7aa20ee169bcd",
-        "name": "HandleSignUp",
-        "func": "const email = msg.payload[\"su-email\"];\nconst password = msg.payload[\"su-password\"];\nconst confirmPassword = msg.payload[\"su-confirm-password\"];\n\nif (confirmPassword == password) {\n    msg.payload.register = true;\n    msg.payload = {\n        group: {\n            show: [\"Dashboard_Login\"],\n            hide: [\"Dashboard_SignUp\"]\n        }\n    };\n}\nelse {\n    msg.payload.register = false;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 860,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "02157dd465477b1b",
-        "type": "comment",
-        "z": "2ed7aa20ee169bcd",
-        "name": "Login",
-        "info": "",
-        "x": 270,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "74c1f1696eaf585b",
-        "type": "comment",
-        "z": "2ed7aa20ee169bcd",
-        "name": "Home",
-        "info": "",
-        "x": 270,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "ea2812bff68c75fd",
-        "type": "comment",
-        "z": "2ed7aa20ee169bcd",
-        "name": "Sign up",
-        "info": "",
-        "x": 230,
-        "y": 800,
-        "wires": []
-    },
-    {
         "id": "dcc3706bc8179c85",
         "type": "http request",
         "z": "2ed7aa20ee169bcd",
@@ -561,7 +248,7 @@
         "method": "GET",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "https://api.thingspeak.com/channels/1992817/feeds.json?api_key=TVA1VZFG123QRNQ3&results=5",
+        "url": "https://api.thingspeak.com/channels/1992817/feeds.json",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -587,7 +274,7 @@
                 "p": "payload"
             }
         ],
-        "repeat": "",
+        "repeat": "1",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
@@ -614,26 +301,9 @@
         "y": 940,
         "wires": [
             [
-                "7f8dddd3412b67d7"
+                "4970b1c03bacdf52"
             ]
         ]
-    },
-    {
-        "id": "7f8dddd3412b67d7",
-        "type": "debug",
-        "z": "2ed7aa20ee169bcd",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1760,
-        "y": 940,
-        "wires": []
     },
     {
         "id": "81348e26bf2ed355",
@@ -650,6 +320,46 @@
         "x": 1560,
         "y": 680,
         "wires": []
+    },
+    {
+        "id": "75dca14b2ef35cb3",
+        "type": "ui_template",
+        "z": "2ed7aa20ee169bcd",
+        "group": "e072c67e1049564e",
+        "name": "",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "format": "<h1>History</h1>\n<ul style=\"height: 1000px\">\n    <li ng-repeat=\"item in msg.history\">\n        <font color=\"red\">{{item.topic}}</font>\n        <p>{{item.value}}</p>\n        <p>{{item.time}}</p>\n    </li>\n</ul>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 2000,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4970b1c03bacdf52",
+        "type": "function",
+        "z": "2ed7aa20ee169bcd",
+        "name": "History Function",
+        "func": "const feeds = msg.payload.feeds;\nconst length = feeds.length || 0\nconst pm10Value = feeds.filter(item => item.field1 !== null).reverse()[1];\nconst pm2_5Value = feeds.filter(item => item.field2 !== null).reverse()[1];\nmsg.history = [\n    {\n        topic: 'PM 2.5',\n        value: pm2_5Value.field2 || 0,\n        time: new Date(pm2_5Value.created_at).toDateString(),\n    },\n    {\n        topic: 'PM 10',\n        value: pm10Value.field1 || 0,\n        time: new Date(pm10Value.created_at).toDateString(),\n    }\n]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1800,
+        "y": 940,
+        "wires": [
+            [
+                "75dca14b2ef35cb3"
+            ]
+        ]
     },
     {
         "id": "e072c67e1049564e",
@@ -690,49 +400,11 @@
         "sessionExpiry": ""
     },
     {
-        "id": "f07509274c14b590",
-        "type": "ui_group",
-        "name": "Login",
-        "tab": "17506f70b70758c3",
-        "order": 4,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "0f2981f4aa63e7d8",
-        "type": "ui_group",
-        "name": "Sign Up",
-        "tab": "c1b9681649e88341",
-        "order": 4,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
         "id": "d9365e0f.e1bf6",
         "type": "ui_tab",
         "name": "Dashboard",
         "icon": "home",
         "order": 2,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "17506f70b70758c3",
-        "type": "ui_tab",
-        "name": "Login",
-        "icon": "login",
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "c1b9681649e88341",
-        "type": "ui_tab",
-        "name": "Sign Up",
-        "icon": "add",
         "disabled": false,
         "hidden": false
     }
